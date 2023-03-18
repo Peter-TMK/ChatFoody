@@ -4,7 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 
 const app = require("./app");
-const connectMongo = require("./model/connectDB");
+const connectToMongoDB = require("./database");
 const {
 	saveSessionID,
 	loadMessage,
@@ -20,7 +20,7 @@ const {
 const formatMessage = require("./utils/message");
 const sessionMW = require("./config/sessionMW");
 const { config } = require("./config/config");
-const MessageModel = require("./model/messageModel");
+const MessageModel = require("./model/message.model");
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -121,4 +121,4 @@ io.on("connection", async (socket) => {
 	});
 });
 
-connectMongo(server);
+connectToMongoDB(server);
