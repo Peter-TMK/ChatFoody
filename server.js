@@ -16,8 +16,8 @@ const {
 	currentOrder,
 	cancelOrder,
 	saveOrder,
-} = require("./controllers/factoryFunction");
-const formatMessage = require("./utils/message");
+} = require("./controllers/order.controller");
+const formatMessage = require("./utils/chatMessage");
 const sessionMW = require("./config/sessionMW");
 const { config } = require("./config/config");
 const MessageModel = require("./model/message.model");

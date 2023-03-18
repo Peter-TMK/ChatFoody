@@ -1,8 +1,8 @@
 const SessionDB = require("../model/session.model");
 const messageModel = require("../model/message.model");
-const formatMessage = require("../utils/message");
-const { mainMenu, foodMenu } = require("../utils/mainmenu");
-const formatArray = require("../utils/formatArray");
+const formatMessage = require("../utils/chatMessage");
+const { mainMenu, foodMenu } = require("../utils/chatMenu");
+const formatArray = require("../utils/chatArray");
 const { config } = require("../config/config");
 
 exports.saveSessionID = async (sessionID) => {
