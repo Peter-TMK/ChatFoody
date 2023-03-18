@@ -4,10 +4,10 @@ const { config } = require("./config/config");
 function connectToMongoDB(server) {
 	mongoose.set("strictQuery", false);
 	mongoose
-		.connect(config.local_db, {
+		.connect(config.MONGODB_URL, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
-			dbName: config.db_name,
+			dbName: config.DB_NAME,
 		})
 		.then(() =>
 			server.listen(config.PORT, () => {

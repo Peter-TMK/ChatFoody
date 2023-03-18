@@ -9,15 +9,15 @@ const {
 	saveSessionID,
 	loadMessage,
 	welcomeMessage,
-	mainMenu,
+	chatMenu,
 	menu,
 	checkOutOrder,
 	orderHistory,
 	currentOrder,
 	cancelOrder,
 	saveOrder,
-} = require("./controllers/factoryFunction");
-const formatMessage = require("./utils/message");
+} = require("./controllers/order.controller");
+const formatMessage = require("./utils/chatMessage");
 const sessionMW = require("./config/sessionMW");
 const { config } = require("./config/config");
 const MessageModel = require("./model/message.model");
@@ -59,7 +59,7 @@ io.on("connection", async (socket) => {
 
 		switch (levels[sessionId]) {
 			case 0:
-				botMessage = await mainMenu(io, sessionId);
+				botMessage = await chatMenu(io, sessionId);
 				levels[sessionId] = 1;
 				break;
 			case 1:
