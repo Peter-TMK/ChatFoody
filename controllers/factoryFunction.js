@@ -1,5 +1,5 @@
-const SessionDB = require("../model/sessionModel");
-const messageModel = require("../model/messageModel");
+const SessionDB = require("../model/session.model");
+const messageModel = require("../model/message.model");
 const formatMessage = require("../utils/message");
 const { mainMenu, foodMenu } = require("../utils/mainmenu");
 const formatArray = require("../utils/formatArray");

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const { config } = require("../config/config");
+const { config } = require("./config/config");
 
-function connectMongo(server) {
+function connectToMongoDB(server) {
 	mongoose.set("strictQuery", false);
 	mongoose
 		.connect(config.local_db, {
@@ -17,4 +17,4 @@ function connectMongo(server) {
 		.catch((err) => console.log(err));
 }
 
-module.exports = connectMongo;
+module.exports = connectToMongoDB;
