@@ -5,7 +5,7 @@ const { mainMenu, foodMenu } = require("../utils/chatMenu");
 const formatArray = require("../utils/chatArray");
 const { config } = require("../config/config");
 
-exports.saveSessionID = async (sessionID) => {
+const saveSessionID = async (sessionID) => {
 	const checksessionID = await SessionDB.findOne({ sessionID });
 
 	if (!checksessionID) {
@@ -13,7 +13,7 @@ exports.saveSessionID = async (sessionID) => {
 	}
 };
 
-exports.loadMessage = async (io, sessionID) => {
+const loadMessage = async (io, sessionID) => {
 	const oldMessages = await messageModel.find({ sessionID });
 
 	if(!oldMessages) return;
@@ -24,7 +24,7 @@ exports.loadMessage = async (io, sessionID) => {
 	});
 }
 
-exports.welcomeMessage = (io, sessionID) => {
+const welcomeMessage = (io, sessionID) => {
 	io.to(sessionID).emit(
 		"bot message",
 		formatMessage(config.botName, "Hi, I'm ChatFoody, your yummy bot!<br>\
@@ -32,13 +32,13 @@ exports.welcomeMessage = (io, sessionID) => {
 	);
 };
 
-exports.mainMenu = (io, sessionID) => {
+const chatMenu = (io, sessionID) => {
 	let botMessage = formatMessage(config.botName, formatArray("mainMenu",mainMenu));
 	io.to(sessionID).emit("bot message", botMessage);
 	return botMessage;
 };
 
-exports.menu = (io, sessionID) => {
+const menu = (io, sessionID) => {
 	let botMessage = formatMessage(
 		config.botName,
 		formatArray("Please pick your Menu:<br>", foodMenu)
@@ -47,7 +47,7 @@ exports.menu = (io, sessionID) => {
 	return botMessage;
 };
 
-exports.checkOutOrder = async (io, sessionID) => {
+const checkOutOrder = async (io, sessionID) => {
 	const sessionOrder = await SessionDB.findOne({ sessionID });
 
 	let botMessage = "";
@@ -74,7 +74,7 @@ exports.checkOutOrder = async (io, sessionID) => {
 	return botMessage;
 };
 
-exports.orderHistory = async (io, sessionID) => {
+const orderHistory = async (io, sessionID) => {
 	const sessionOrder = await SessionDB.findOne({ sessionID });
 
 	let botMessage = "";
@@ -97,7 +97,7 @@ exports.orderHistory = async (io, sessionID) => {
 	return botMessage;
 };
 
-exports.currentOrder = async (io, sessionID) => {
+const currentOrder = async (io, sessionID) => {
 	const sessionOrder = await SessionDB.findOne({ sessionID });
 
 	let botMessage = "";
@@ -118,7 +118,7 @@ exports.currentOrder = async (io, sessionID) => {
 	return botMessage;
 };
 
-exports.cancelOrder = async (io, sessionID) => {
+const cancelOrder = async (io, sessionID) => {
 	const sessionOrder = await SessionDB.findOne({ sessionID });
 
 	let botMessage = "";
@@ -141,7 +141,7 @@ exports.cancelOrder = async (io, sessionID) => {
 	return botMessage;
 };
 
-exports.saveOrder = async (io, sessionID, number) => {
+const saveOrder = async (io, sessionID, number) => {
 	const sessionOrder = await SessionDB.findOne({ sessionID });
 
 	let botMessage = "";
@@ -176,3 +176,16 @@ exports.saveOrder = async (io, sessionID, number) => {
 
 	return botMessage;
 };
+
+module.exports = {
+	saveSessionID,
+	loadMessage,
+	welcomeMessage,
+	chatMenu,
+	menu,
+	checkOutOrder,
+	orderHistory,
+	currentOrder,
+	cancelOrder,
+	saveOrder,
+}

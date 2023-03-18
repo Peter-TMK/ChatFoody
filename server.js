@@ -9,7 +9,7 @@ const {
 	saveSessionID,
 	loadMessage,
 	welcomeMessage,
-	mainMenu,
+	chatMenu,
 	menu,
 	checkOutOrder,
 	orderHistory,
@@ -59,7 +59,7 @@ io.on("connection", async (socket) => {
 
 		switch (levels[sessionId]) {
 			case 0:
-				botMessage = await mainMenu(io, sessionId);
+				botMessage = await chatMenu(io, sessionId);
 				levels[sessionId] = 1;
 				break;
 			case 1:
