@@ -6,5 +6,8 @@ const sessionMW = require("./config/sessionMW");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(sessionMW);
+app.use((err, req, res, next)=>{
+    console.log(err.stack)
+})
 
 module.exports = app;
